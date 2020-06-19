@@ -1,0 +1,122 @@
+.quill-video-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quill-video-player-content {
+  margin: auto;
+  position: relative;
+  max-width: 640px;
+  background-color: rgba(43, 51, 63, 0.98);
+  overflow: hidden;
+  cursor: default;
+
+  &.active {
+    &:hover {
+      .quill-video-player-controls {
+        transform: translateY(0);
+      }
+    }
+
+    .quill-video-player-controls {
+      transform: translateY(24px);
+    }
+  }
+}
+
+.quill-video-player-content video {
+  margin: 0;
+  width: 100% !important;
+  display: block;
+  cursor: default;
+}
+
+.quill-video-player-controls {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: rgba(43, 51, 63, 0.7);
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: default;
+  transform: translateY(0);
+  transition: all 0.3s 0s ease-in;
+}
+
+.quill-video-player-switch {
+  margin-left: 8px;
+  display: block;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.quill-video-player-icon-play,
+.quill-video-player-icon-pause,
+.quill-video-player-fullscreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 18px;
+    fill: #fff;
+  }
+}
+
+.quill-video-player-icon-pause {
+  display: none;
+
+  svg {
+    width: 20px;
+  }
+}
+
+.quill-video-player-progress {
+  position: relative;
+  width: calc(100% - 210px);
+  height: 4px;
+  background-color: rgba(115, 133, 159, 0.5);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.quill-video-player-progress-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #fff;
+}
+
+.quill-video-player-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 20px;
+
+  span {
+    margin: 5px;
+  }
+}
+
+.quill-video-player-fullscreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}

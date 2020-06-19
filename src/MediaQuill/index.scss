@@ -1,0 +1,12 @@
+@import "../../node_modules/quill/dist/quill.snow.css";
+
+#editorQuill {
+  height: 600px;
+  
+  img {
+    min-width: 110px;
+    display: block;
+    max-width: 640px;
+    margin: auto;
+  }
+}

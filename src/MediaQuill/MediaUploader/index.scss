@@ -1,0 +1,21 @@
+// toolbar音频上传按钮样式---暂未实现功能
+.ql-audio {
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    svg {
+      fill: #0067cc;
+    }
+  }
+
+  svg {
+    margin-left: 2px;
+    height: 80% !important;
+    fill: #444;
+  }
+}
