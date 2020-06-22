@@ -19,7 +19,7 @@ const path = require('path');
 const chalk = require('react-dev-utils/chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
-const configFactory = require('../config/webpack.config-quill');
+const configFactory = require('../config/webpack.config-quill-es');
 const paths = require('../config/paths');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
@@ -53,15 +53,15 @@ checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.
     // This lets us display how much they changed later.
-    return measureFileSizesBeforeBuild(paths.quillLib);
+    return measureFileSizesBeforeBuild(paths.quillEs);
   })
   .then(previousFileSizes => {
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
-    fs.emptyDirSync(paths.quillLib);
+    fs.emptyDirSync(paths.quillEs);
     
     // Merge with the public folder
-    // copyMediaQuillFolder();
+    copyTypes();
 
     // Start the webpack build
     return build(previousFileSizes);
@@ -89,7 +89,7 @@ checkBrowsers(paths.appPath, isInteractive)
       printFileSizesAfterBuild(
         stats,
         previousFileSizes,
-        paths.quillLib,
+        paths.quillEs,
         WARN_AFTER_BUNDLE_GZIP_SIZE,
         WARN_AFTER_CHUNK_GZIP_SIZE
       );
@@ -97,12 +97,12 @@ checkBrowsers(paths.appPath, isInteractive)
       const appPackage = require(paths.appPackageJson);
       const publicUrl = paths.publicUrlOrPath;
       const publicPath = config.output.publicPath;
-      const libFolder = path.relative(process.cwd(), paths.quillLib);
+      const buildFolder = path.relative(process.cwd(), paths.quillEs);
       printHostingInstructions(
         appPackage,
         publicUrl,
         publicPath,
-        libFolder,
+        buildFolder,
         useYarn
       );
     },
@@ -204,8 +204,8 @@ function build(previousFileSizes) {
   });
 }
 
-function copyMediaQuillFolder() {
-  fs.copySync(paths.quillMain, paths.quillLib, {
+function copyTypes() {
+  fs.copySync(paths.quillSrcPublish, paths.quillPublish, {
     dereference: true,
     filter: file => file !== paths.appHtml,
   });

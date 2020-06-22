@@ -5,7 +5,7 @@
 /dist
 /build
 /.pnp
-/publish/src
+/publish/es
 /publish/lib
 .pnp.js
 

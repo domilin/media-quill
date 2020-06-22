@@ -24,7 +24,7 @@ module.exports = function() {
       "videoPlayer": paths.quillVideo
     },
     output: {
-      path: paths.quillLib,
+      path: paths.quillEs,
       publicPath: "./",
       filename: "[name].js",
       // library: 'MediaQuill',
@@ -47,6 +47,26 @@ module.exports = function() {
     },
     resolveLoader: {
       plugins: [PnpWebpackPlugin.moduleLoader(module)]
+    },
+    externals: { // 定义外部依赖，避免把react和react-dom打包进去
+      dompurify: {
+          root: "dompurify",
+          commonjs2: "dompurify",
+          commonjs: "dompurify",
+          amd: "dompurify",
+      },
+      lodash: {
+          root: "lodash",
+          commonjs2: "lodash",
+          commonjs: "lodash",
+          amd: "lodash",
+      },
+      quill: {
+          root: "quill",
+          commonjs2: "quill",
+          commonjs: "quill",
+          amd: "quill",
+      }
     },
     module: {
       strictExportPresence: true,
@@ -118,7 +138,7 @@ module.exports = function() {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: `[name].css`
+        filename: `[name].scss`
       }),
       new ForkTsCheckerWebpackPlugin({
         typescript: resolve.sync("typescript", {
