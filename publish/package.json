@@ -1,9 +1,9 @@
 {
   "name": "media-quill",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Multimedia Rich text Editor based on Quill",
   "private": false,
-  "main": "lib/index.ts",
+  "main": "src/index.ts",
   "author": "chirsChou",
   "license": "ISC",
   "repository": {
@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/domilin/media-quill/issues"
   },
-  "homepage": "https://github.com/domilin/media-quill#readme",
+  "homepage": "https://github.com/domilin/media-quill",
   "dependencies": {
     "dompurify": "^2.0.11",
     "lodash": "^4.17.15",
