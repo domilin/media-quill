@@ -65,7 +65,10 @@ module.exports = {
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrlOrPath,
-  quillDist: resolveApp('dist'),
+  quillPublish: resolveApp('publish'),
+  quillLib: resolveApp('publish/lib'),
+  quillSrc: resolveApp('publish/src'),
+  quillMain: resolveApp('src/MediaQuill'),
   quillIndex: resolveModule(resolveApp, 'src/MediaQuill/index'),
   quillVideo: resolveModule(resolveApp, 'src/MediaQuill/blots/VideoPlayBlots/index'),
 };

@@ -2,7 +2,11 @@
 
 # dependencies
 /node_modules
+/dist
+/build
 /.pnp
+/publish/src
+/publish/lib
 .pnp.js
 
 # testing

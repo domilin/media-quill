@@ -15,7 +15,6 @@ const useTypeScript = fs.existsSync(paths.appTsConfig);
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== "false";
 const isEnvProductionProfile = process.argv.includes("--profile");
 
-// video.js
 module.exports = function() {
   return {
     devtool: "source-map",
@@ -24,11 +23,13 @@ module.exports = function() {
       "videoPlayer": paths.quillVideo
     },
     output: {
-      path: paths.quillDist,
+      path: paths.quillLib,
       publicPath: "./",
       filename: "[name].min.js",
-      libraryTarget: "umd",
-      umdNamedDefine: true
+      // library: 'MediaQuill',
+      libraryTarget: 'umd',
+      umdNamedDefine: true,
+      libraryExport: 'default',
     },
     resolve: {
       modules: ["node_modules", paths.appNodeModules].concat(modules.additionalModulePaths || []),
