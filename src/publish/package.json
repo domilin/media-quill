@@ -1,6 +1,6 @@
 {
   "name": "media-quill",
-  "version": "0.1.5",
+  "version": "0.1.9",
   "description": "Multimedia Rich text Editor based on Quill",
   "private": false,
   "author": "chirsChou",
@@ -16,7 +16,7 @@
   "main": "es/index.js",
   "module": "es/index.js",
   "unpkg": "lib/index.js",
-  "typings": "types.d.ts",
+  "typings": "es/index.d.ts",
   "files": [
     "es",
     "lib"
