@@ -29,9 +29,10 @@ export default class MediaQuill extends Quill {
             return false
         }
 
-        if (base64Img.length > 0) {
-            for (let key in base64Img) {
-                const item = base64Img[key]
+        const base64ImgArr = Array.prototype.slice.call(base64Img);
+        if (base64ImgArr.length > 0) {
+            for (let key in base64ImgArr) {
+                const item = base64ImgArr[key]
                 const src = item.getAttribute('src') || ""
                 const reg = /^\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([a-z0-9!$&',()*+;=\-._~:@\\/?%\s]*?)\s*$/i;
 

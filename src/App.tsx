@@ -29,7 +29,7 @@ function App() {
             const uploadUrl: string = await new Promise(function(resolve) {
               setTimeout(function() {
                 resolve("https://hx24.huoxing24.com/image/crawler/2020/06/12/1591948252841567.jpg");
-              }, 20000);
+              }, 2000);
             });
 
             return uploadUrl;
@@ -41,7 +41,7 @@ function App() {
             const uploadUrl: string = await new Promise(function(resolve) {
               setTimeout(function() {
                 resolve("https://hx24.huoxing24.com/image/crawler/2020/06/12/1591948252841567.jpg");
-              }, 100000);
+              }, 5000);
             });
 
             return uploadUrl;
@@ -53,10 +53,6 @@ function App() {
                 resolve("https://test-hx24-media.huoxing24.com/video/news/2020/06/23/20200623191858733119.mp4");
               }, 1000);
             });
-
-            setTimeout(function() {
-              editorQuill.videoInit()
-            }, 3000);
 
             return uploadUrl;
           }
@@ -88,12 +84,18 @@ function App() {
       //   console.log("Cursor not in the editor");
       // }
     });
+
+    setTimeout(function() {
+      editorQuill.videoInit()
+    }, 3000);
+
     setEditor(editorQuill);
   }, [editor]);
   return (
     <div className="App">
       <div id="editorQuill"></div>
-      <button onClick={()=>{
+      <button onClick={() => {
+        console.log(editor?.root.innerHTML);
         editor?.mediaUploading()
       }}>检测是否加载中</button>
     </div>
