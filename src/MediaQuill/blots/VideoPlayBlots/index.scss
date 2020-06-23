@@ -1,3 +1,5 @@
+@import "../MediaUplodBlots/index.scss";
+
 .quill-video-player {
   display: flex;
   align-items: center;
@@ -23,13 +25,24 @@
       transform: translateY(24px);
     }
   }
-}
 
-.quill-video-player-content video {
-  margin: 0;
-  width: 100% !important;
-  display: block;
-  cursor: default;
+  video {
+    margin: 0;
+    width: 100% !important;
+    display: block;
+    cursor: default;
+    z-index: 0;
+  }
+
+  .quill-media-loading-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+  }
 }
 
 .quill-video-player-controls {
@@ -45,6 +58,7 @@
   cursor: default;
   transform: translateY(0);
   transition: all 0.3s 0s ease-in;
+  z-index: 1;
 }
 
 .quill-video-player-switch {

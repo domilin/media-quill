@@ -12,9 +12,17 @@ export default (id: string): void => {
   const crrTime = wrapper?.querySelector(".quill-video-player-cur-time") as HTMLDivElement;
   const totalTime = wrapper?.querySelector(".quill-video-player-total-time") as HTMLDivElement;
   const fullscreen = wrapper?.querySelector(".quill-video-player-fullscreen") as HTMLDivElement;
+  const loading = wrapper?.querySelector(".quill-media-loading-content") as HTMLDivElement;
   let videoCanPlay = false;
 
-  // 点击播放时候
+  // 视频加载错误，每隔两秒重新加载
+  video.onerror = function(){
+    setTimeout(function(){
+      video.load()
+    }, 2000)
+  }
+
+  // 点击播放视频
   const videoPlay = (): void => {
     video.play();
 
@@ -49,6 +57,8 @@ export default (id: string): void => {
   let cTime: number;
   video.oncanplay = function(): void {
     videoCanPlay = true;
+    loading.setAttribute('style', 'display:none')
+
     // 显示总时长
     tTime = video.duration;
     // 将总秒数,转换为 时分秒格式 00:00:00

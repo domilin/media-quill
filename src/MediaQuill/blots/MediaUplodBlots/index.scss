@@ -2,62 +2,62 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  .quill-media-loading-content {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
+.quill-media-loading-content {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  transition: all 0.3s 0s ease-in;
+  max-width: 640px;
+
+  &::before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    margin-left: -15px;
+    border-radius: 50%;
+    border: 3px solid #f0f2f5;
+    border-top-color: #06c;
+    z-index: 1;
+    animation: spinner 0.6s linear infinite;
+  }
+
+  .quill-video-uploading-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 240px;
+    width: 320px;
+    background: #f0f2f5;
+
+    svg {
+      height: 50%;
+      fill: #dee3eb;
+    }
+  }
+
+  .quill-media-loading-mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+
+  img {
+    max-width: 100% !important;
+    filter: blur(1px);
+    opacity: 0.5;
     transition: all 0.3s 0s ease-in;
-    max-width: 640px;
-
-    &::before {
-      content: "";
-      box-sizing: border-box;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 30px;
-      height: 30px;
-      margin-top: -15px;
-      margin-left: -15px;
-      border-radius: 50%;
-      border: 3px solid #f0f2f5;
-      border-top-color: #06c;
-      z-index: 1;
-      animation: spinner 0.6s linear infinite;
-    }
-
-    .quill-video-uploading-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 240px;
-      width: 320px;
-      background: #f0f2f5;
-
-      svg {
-        height: 50%;
-        fill: #dee3eb;
-      }
-    }
-
-    .quill-media-loading-mask {
-      position: absolute;
-      left: 0;
-      top: 0;
-      display: block;
-      height: 100%;
-      width: 100%;
-      z-index: 1;
-    }
-
-    img {
-      max-width: 100% !important;
-      filter: blur(1px);
-      opacity: 0.5;
-      transition: all 0.3s 0s ease-in;
-      z-index: 0;
-    }
+    z-index: 0;
   }
 }
 

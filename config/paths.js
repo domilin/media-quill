@@ -69,6 +69,8 @@ module.exports = {
   quillLib: resolveApp('publish/lib'),
   quillEs: resolveApp('publish/es'),
   quillSrcPublish: resolveApp('src/publish'),
+  quillSrcPublishMd: resolveApp('src/publish/README.md'),
+  quillMd: resolveApp('README.md'),
   quillIndex: resolveModule(resolveApp, 'src/MediaQuill/index'),
   quillVideo: resolveModule(resolveApp, 'src/MediaQuill/blots/VideoPlayBlots/index'),
 };

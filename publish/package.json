@@ -1,6 +1,6 @@
 {
   "name": "media-quill",
-  "version": "0.1.9",
+  "version": "0.1.12",
   "description": "Multimedia Rich text Editor based on Quill",
   "private": false,
   "author": "chirsChou",

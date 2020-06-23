@@ -16,10 +16,12 @@ class VideoPlayer extends BlockEmbed {
     const node = document.createElement("div");
     node.className = "quill-video-player-content";
 
+    /** @desc ---------video---------- */
     const video = document.createElement("video");
     video.setAttribute("src", src as string);
     node.appendChild(video);
 
+    /** @desc ---------controls---------- */
     const controls = document.createElement("div");
     controls.className = "quill-video-player-controls";
 
@@ -68,6 +70,11 @@ class VideoPlayer extends BlockEmbed {
     controls.appendChild(fullscreen);
 
     node.appendChild(controls);
+
+    /** @desc ---------canPlay前显示loading样式---------- */
+    const loading = document.createElement("div");
+    loading.className = "quill-media-loading-content";
+    node.appendChild(loading);
 
     // 设置id，用于播放js执行，MediaUploader
     if (id) nodeWrapper.setAttribute("id", id);

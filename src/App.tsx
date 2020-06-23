@@ -51,7 +51,7 @@ function App() {
             const uploadUrl: string = await new Promise(function(resolve) {
               setTimeout(function() {
                 resolve("https://hx24-media.huoxing24.com/video/news/2020/06/18/20200618082120636599.mp4");
-              }, 100000);
+              }, 1000);
             });
 
             return uploadUrl;
