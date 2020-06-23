@@ -2,6 +2,7 @@ import Quill from "quill";
 import MedaiUploader from "./MediaUploader";
 import ImageResize from "./ImageResize";
 import PasteSmart from "./PasteSmart";
+import { videoInit } from './blots/VideoPlayBlots/videoPlayer'
 
 import "./index.scss";
 
@@ -11,6 +12,11 @@ Quill.register("modules/imageResize", ImageResize);
 Quill.register("modules/clipboard", PasteSmart, true);
 
 export default class MediaQuill extends Quill {
+    // 默认视频播放: 重新编辑文章
+    public videoInit ():void {
+        videoInit()
+    }
+
     // 提交时检测是否有media-uploading, img的src是否包含base64
     public mediaUploading (): boolean {
         const uploading = this.root.getElementsByClassName('quill-media-uploading')

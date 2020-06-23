@@ -50,9 +50,13 @@ function App() {
             console.log(file);
             const uploadUrl: string = await new Promise(function(resolve) {
               setTimeout(function() {
-                resolve("https://hx24-media.huoxing24.com/video/news/2020/06/18/20200618082120636599.mp4");
+                resolve("https://test-hx24-media.huoxing24.com/video/news/2020/06/23/20200623191858733119.mp4");
               }, 1000);
             });
+
+            setTimeout(function() {
+              editorQuill.videoInit()
+            }, 3000);
 
             return uploadUrl;
           }

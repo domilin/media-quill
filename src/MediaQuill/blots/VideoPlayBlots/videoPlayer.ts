@@ -1,7 +1,7 @@
 import { anyType } from "../../types";
 import { mouseOffset, elementOffset } from "../../utils";
 
-export default (id: string): void => {
+const videoPlayer = (id: string): void => {
   const wrapper = document.getElementById(id) as HTMLDivElement;
   const content = wrapper.firstChild as HTMLDivElement;
   const video = wrapper?.querySelector("video") as HTMLVideoElement;
@@ -14,13 +14,14 @@ export default (id: string): void => {
   const fullscreen = wrapper?.querySelector(".quill-video-player-fullscreen") as HTMLDivElement;
   const loading = wrapper?.querySelector(".quill-media-loading-content") as HTMLDivElement;
   let videoCanPlay = false;
+  video.load();
 
   // 视频加载错误，每隔两秒重新加载
-  video.onerror = function(){
-    setTimeout(function(){
-      video.load()
-    }, 2000)
-  }
+  video.onerror = function() {
+    setTimeout(function() {
+      video.load();
+    }, 2000);
+  };
 
   // 点击播放视频
   const videoPlay = (): void => {
@@ -57,7 +58,7 @@ export default (id: string): void => {
   let cTime: number;
   video.oncanplay = function(): void {
     videoCanPlay = true;
-    loading.setAttribute('style', 'display:none')
+    loading.setAttribute("style", "display:none");
 
     // 显示总时长
     tTime = video.duration;
@@ -149,3 +150,16 @@ export default (id: string): void => {
     }
   };
 };
+
+// 默认视频播放: 重新编辑文章, 前端页面显示文章内容时引用
+export const videoInit = () => {
+  const videoComps = document.getElementsByClassName("quill-video-player");
+  const videoCompsArr = Array.prototype.slice.call(videoComps);
+  if (videoComps.length === 0) return;
+  for (const item of videoCompsArr) {
+    const id = item.getAttribute("id") as string;
+    videoPlayer(id);
+  }
+};
+
+export default videoPlayer;
