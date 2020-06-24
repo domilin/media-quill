@@ -4,7 +4,7 @@ interface InitParams {
   height?: string;
   width?: string;
 }
-export const videoInit: (args: InitParams) => NotVoid;
+export const videoInit: (args?: InitParams) => NotVoid;
   
 interface PlayerParams extends InitParams {
   id: string;
