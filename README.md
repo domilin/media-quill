@@ -16,7 +16,10 @@ Provide two apis
 Used to reedit text and rich text display
 
 ```javascript
+// display side
 videoInit({ width: "600px", height: "400px" });
+// editor side
+mediaQuill.videoInit({ width: "600px", height: "400px" });
 ```
 
 width: video component width  
@@ -27,7 +30,7 @@ height: Video component height
 Check for pictures and videos uploaded when submitting rich text
 
 ```javascript
-editorQuill.mediaUploading();
+mediaQuill.mediaUploading();
 ```
 
 # Installation
@@ -51,7 +54,6 @@ But they can all use JS or TS
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import MediaQuill from "media-quill";
-import { videoInit } from "media-quill/es/videoPlayer";
 import { RootDispatch } from "../../models/store";
 
 import "./index.scss";
@@ -115,7 +117,7 @@ export default (): JSX.Element => {
     setEditor(editorQuill);
 
     // Initialize the video player
-    videoInit();
+    editorQuill.videoInit();
     // Check if a picture or video is uploading
     console.log(editorQuill.mediaUploading());
   }, [editor, dispatch]);
