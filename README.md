@@ -30,6 +30,12 @@ Check for pictures and videos uploaded when submitting rich text
 editorQuill.mediaUploading();
 ```
 
+# Installation
+
+```javascript
+npm install --save media-quill
+```
+
 # Example
 
 **Since it contains the video player, it contains both ends: editor side, display side**

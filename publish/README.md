@@ -19,7 +19,7 @@ Used to reedit text and rich text display
 videoInit({ width: "600px", height: "400px" });
 ```
 
-width: video component width
+width: video component width  
 height: Video component height
 
 ### 2: mediaUploading
@@ -28,6 +28,12 @@ Check for pictures and videos uploaded when submitting rich text
 
 ```javascript
 editorQuill.mediaUploading();
+```
+
+# Installation
+
+```javascript
+npm install --save media-quill
 ```
 
 # Example
