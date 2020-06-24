@@ -1,7 +1,7 @@
 import { anyType } from "../../types";
 import { mouseOffset, elementOffset } from "../../utils";
 
-const videoPlayer = (id: string): void => {
+export const videoPlayer = (id: string): void => {
   const wrapper = document.getElementById(id) as HTMLDivElement;
   const content = wrapper.firstChild as HTMLDivElement;
   const video = wrapper?.querySelector("video") as HTMLVideoElement;
@@ -14,13 +14,14 @@ const videoPlayer = (id: string): void => {
   const fullscreen = wrapper?.querySelector(".quill-video-player-fullscreen") as HTMLDivElement;
   const loading = wrapper?.querySelector(".quill-media-loading-content") as HTMLDivElement;
   let videoCanPlay = false;
-  video.load();
 
-  // 视频加载错误，每隔两秒重新加载
+  // dom渲染完成后，20ms之后加事件，将不起作用，故在此首先重新load一遍video资源
+  video.load();
+  // 视频加载错误，每隔4s重新加载
   video.onerror = function() {
     setTimeout(function() {
       video.load();
-    }, 2000);
+    }, 4000);
   };
 
   // 点击播放视频
@@ -162,4 +163,7 @@ export const videoInit = () => {
   }
 };
 
-export default videoPlayer;
+export default {
+  videoInit,
+  videoPlayer
+}

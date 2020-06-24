@@ -54,6 +54,10 @@ function App() {
               }, 1000);
             });
 
+            setTimeout(function() {
+              editorQuill.videoInit()
+            }, 5000);
+
             return uploadUrl;
           }
         }
@@ -85,9 +89,9 @@ function App() {
       // }
     });
 
-    setTimeout(function() {
-      editorQuill.videoInit()
-    }, 3000);
+    // setTimeout(function() {
+    //   editorQuill.videoInit()
+    // }, 3000);
 
     setEditor(editorQuill);
   }, [editor]);

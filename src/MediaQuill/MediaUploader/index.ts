@@ -2,7 +2,7 @@ import Quill, { RangeStatic } from "quill";
 import MediaLoading from "../blots/MediaUplodBlots";
 import videoBlots from "../blots/VideoPlayBlots";
 import { anyType } from "../types";
-import videoPlayer from "../blots/VideoPlayBlots/videoPlayer";
+import { videoPlayer } from "../blots/VideoPlayBlots/videoPlayer";
 
 import "./index.scss";
 import { uuid } from "../utils";

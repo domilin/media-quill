@@ -21,12 +21,12 @@ export default class MediaQuill extends Quill {
     public mediaUploading (): boolean {
         const uploading = this.root.getElementsByClassName('quill-media-uploading')
         const base64Img = this.root.getElementsByTagName('img')
-        if (uploading.length === 0 && base64Img.length === 0) return true
+        if (uploading.length === 0 && base64Img.length === 0) return false
         
         if (uploading.length > 0) {
             const item = uploading[0]
             item.scrollIntoView();
-            return false
+            return true
         }
 
         const base64ImgArr = Array.prototype.slice.call(base64Img);
@@ -38,7 +38,7 @@ export default class MediaQuill extends Quill {
 
                 if (reg.test(src)) {
                     item.scrollIntoView();
-                    return false
+                    return true
                 }
             }
         }
