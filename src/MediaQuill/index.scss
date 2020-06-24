@@ -1,12 +1,21 @@
 @import "../../node_modules/quill/dist/quill.snow.css";
 
-#editorQuill {
-  height: 600px;
-  
+.ql-editor {
   img {
     min-width: 110px;
     display: block;
     max-width: 640px;
     margin: auto;
+  }
+
+  color: #333;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  line-height: 30px;
+
+  p {
+    word-break: break-all;
+    word-wrap: break-word;
+    text-align: justify;
   }
 }
