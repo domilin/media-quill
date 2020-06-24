@@ -1,8 +1,26 @@
 import { anyType } from "../../types";
 import { mouseOffset, elementOffset } from "../../utils";
 
-export const videoPlayer = (id: string): void => {
-  const wrapper = document.getElementById(id) as HTMLDivElement;
+// 默认视频播放: 重新编辑文章, 前端页面显示文章内容时引用
+interface InitParams {
+  height?: string;
+  width?: string;
+}
+export const videoInit = (args?: InitParams): void => {
+  const videoComps = document.getElementsByClassName("quill-video-player");
+  const videoCompsArr = Array.prototype.slice.call(videoComps);
+  if (videoComps.length === 0) return;
+  for (const item of videoCompsArr) {
+    const id = item.getAttribute("id") as string;
+    videoPlayer({ height: args?.height, width: args?.width, id });
+  }
+};
+
+interface PlayerParams extends InitParams {
+  id: string;
+}
+export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
+  const wrapper = document.getElementById(id as string) as HTMLDivElement;
   const content = wrapper.firstChild as HTMLDivElement;
   const video = wrapper?.querySelector("video") as HTMLVideoElement;
   const playBtn = wrapper?.querySelector(".quill-video-player-icon-play") as HTMLDivElement;
@@ -15,10 +33,14 @@ export const videoPlayer = (id: string): void => {
   const loading = wrapper?.querySelector(".quill-media-loading-content") as HTMLDivElement;
   let videoCanPlay = false;
 
+  if (width && !height) content.setAttribute("style", `width: ${parseFloat(width)}px`);
+  if (!width && height) content.setAttribute("style", `height: ${parseFloat(height)}px`);
+  if (width && height) content.setAttribute("style", `width: ${parseFloat(width)}px; height: ${parseFloat(height)}px`);
+
   // dom渲染完成后，20ms之后加事件，将不起作用，故在此首先重新load一遍video资源
   video.load();
   // 视频加载错误，每隔4s重新加载
-  video.onerror = function() {
+  video.onerror = function(): void {
     setTimeout(function() {
       video.load();
     }, 4000);
@@ -152,18 +174,7 @@ export const videoPlayer = (id: string): void => {
   };
 };
 
-// 默认视频播放: 重新编辑文章, 前端页面显示文章内容时引用
-export const videoInit = () => {
-  const videoComps = document.getElementsByClassName("quill-video-player");
-  const videoCompsArr = Array.prototype.slice.call(videoComps);
-  if (videoComps.length === 0) return;
-  for (const item of videoCompsArr) {
-    const id = item.getAttribute("id") as string;
-    videoPlayer(id);
-  }
-};
-
 export default {
   videoInit,
   videoPlayer
-}
+};

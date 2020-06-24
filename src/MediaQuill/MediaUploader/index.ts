@@ -202,7 +202,7 @@ class MediaUploader {
     // Insert the server saved video
     const id = `quillVideoPlayer${uuid()}`;
     this.quill.insertEmbed(index, videoBlots.blotName, { src: url, id }, "user");
-    videoPlayer(id);
+    videoPlayer({ id });
 
     this.selectNextBlot();
   }

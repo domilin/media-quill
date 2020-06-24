@@ -1,7 +1,17 @@
-export const videoInit: () => void;
-export const videoPlayer: (id:string) => void;
+import { NotVoid } from "lodash";
 
-export default {
-    videoInit,
-    videoPlayer
+interface InitParams {
+  height?: string;
+  width?: string;
 }
+export const videoInit: (args: InitParams) => NotVoid;
+  
+interface PlayerParams extends InitParams {
+  id: string;
+}
+export const videoPlayer: (args: PlayerParams) => void;
+  
+export default {
+  videoInit,
+  videoPlayer
+};
