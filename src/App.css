@@ -1,7 +1,4 @@
 .App {
-  text-align: center;
-}
-
-#editorQuill {
-  height: 400px;
+  height: 600px;
+  width: 800px;
 }

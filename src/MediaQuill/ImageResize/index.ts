@@ -60,6 +60,11 @@ export default class ImageResize {
     this.moduleClasses = this.options.modules;
 
     this.modules = [];
+
+    // 父级滚动时hide(), 防止在定了高宽后，resize位置跟图片位置不一致
+    (this.quill as anyType).root.addEventListener('scroll', (event:MouseEvent) =>{ 
+      this.hide()
+    })
   }
 
   public initializeModules = (): void => {
@@ -125,7 +130,8 @@ export default class ImageResize {
       this.hideOverlay();
     }
 
-    this.quill.setSelection(0, 0);
+    const index = this.quill.getIndex(Quill.find(this.img as Node))
+    this.quill.setSelection(index, 0);
 
     // prevent spurious text selection
     this.setUserSelect("none");
