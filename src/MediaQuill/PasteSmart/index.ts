@@ -30,6 +30,10 @@ class PasteSmart extends Clipboard {
 
   onPaste(event: ClipboardEvent): void {
     event.preventDefault();
+    if (this.options && this.options.paste) {
+      this.options.paste(event)
+    }
+
     const range = this.quill.getSelection();
 
     const text = (event.clipboardData as DataTransfer).getData("text/plain");

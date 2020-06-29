@@ -92,6 +92,9 @@ export default (): JSX.Element => {
               return res.obj[0].imgSrc;
             }
           },
+          paste: function (event: MouseEvent) {
+            console.log(event);
+          },
         },
         mediaUploader: {
           imageUpload: async (file: File): Promise<string | undefined> => {

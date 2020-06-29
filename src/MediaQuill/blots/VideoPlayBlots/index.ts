@@ -87,8 +87,9 @@ class VideoPlayer extends BlockEmbed {
   }
 
   static value(domNode: HTMLElement): DOMStringMap {
-    const { src, custom } = domNode.dataset;
-    return { src, custom };
+    const id = domNode.getAttribute('id') as string
+    const src = domNode.querySelector('video')?.getAttribute('src') as string
+    return { id, src };
   }
 
   deleteAt(index: number, length: number): void {
