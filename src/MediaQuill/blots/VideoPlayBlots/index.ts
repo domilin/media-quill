@@ -18,10 +18,10 @@ class VideoPlayer extends BlockEmbed {
 
     /** @desc ---------video---------- */
     const video = document.createElement("video");
-    // const source = document.createElement('source')
-    // source.setAttribute("src", src as string);
-    // video.appendChild(source)
     video.setAttribute("src", src as string);
+    video.setAttribute("playsinline", "true");
+    video.setAttribute("webkit-playsinline", "true");
+    video.setAttribute("x5-playsinline", "true");
     node.appendChild(video);
 
     /** @desc ---------controls---------- */

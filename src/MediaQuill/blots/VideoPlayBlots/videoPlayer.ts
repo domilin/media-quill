@@ -70,9 +70,23 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     video.pause();
     videoPause();
   };
+
+  // 播放完成后样式为播放样式
   video.onended = function(): void {
     videoPause();
   };
+
+  // 点击视频时播放与暂停
+  video.onclick = function ():void {
+    if (!videoCanPlay) return;
+
+    if (video.paused) {
+      videoPlay();
+    } else {
+      video.pause();
+      videoPause();
+    }
+  }
 
   // 算出视频的时间显示出来,视频能播放的时候
   // oncanplay : 当时加载完成后的时间,
