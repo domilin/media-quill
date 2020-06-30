@@ -40,15 +40,15 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   const loading = wrapper?.querySelector(".quill-media-loading-content") as HTMLDivElement;
   let videoCanPlay = false;
 
-  let contentStyle = ''
+  let contentStyle = "";
   if (width && !height) contentStyle = `width: ${parseFloat(width)}px`;
   if (!width && height) contentStyle = `height: ${parseFloat(height)}px`;
   if (width && height) contentStyle = `width: ${parseFloat(width)}px; height: ${parseFloat(height)}px`;
   content.setAttribute("style", contentStyle);
 
-  barProgress.setAttribute('style', 'width: 0;')
-  bufferProgress.setAttribute('style', 'width: 0;')
-  curProgress.setAttribute('style', 'left: -4px;')
+  barProgress.setAttribute("style", "width: 0; display: block;");
+  curProgress.setAttribute("style", "left: -4px; display: block;");
+  bufferProgress.setAttribute("style", "width: 0; display: block;");
 
   // dom渲染完成后，20ms之后加事件，将不起作用，故在此首先重新load一遍video资源
   video.load();
@@ -59,24 +59,23 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     }, 4000);
   };
 
-  
-  let bigPlayBtnShowTimer:NodeJS.Timeout;
+  let bigPlayBtnShowTimer: NodeJS.Timeout;
   const bigPlayBtnShow = () => {
-    clearTimeout(bigPlayBtnHideTimer)
-    bigPlayBtn.setAttribute("style", 'transform: scale(0); opacity: 0;');
-    bigPlayBtnShowTimer = setTimeout(function(){
-      bigPlayBtn.setAttribute("style", "transform: scale(1); opacity: 1;");
-    }, 10)
-  }
-
-  let bigPlayBtnHideTimer:NodeJS.Timeout;
-  const bigPlayBtnHide = () => {
-    clearTimeout(bigPlayBtnShowTimer)
+    clearTimeout(bigPlayBtnHideTimer);
     bigPlayBtn.setAttribute("style", "transform: scale(0); opacity: 0;");
-    bigPlayBtnHideTimer = setTimeout(function(){
+    bigPlayBtnShowTimer = setTimeout(function() {
+      bigPlayBtn.setAttribute("style", "transform: scale(1); opacity: 1;");
+    }, 10);
+  };
+
+  let bigPlayBtnHideTimer: NodeJS.Timeout;
+  const bigPlayBtnHide = () => {
+    clearTimeout(bigPlayBtnShowTimer);
+    bigPlayBtn.setAttribute("style", "transform: scale(0); opacity: 0;");
+    bigPlayBtnHideTimer = setTimeout(function() {
       bigPlayBtn.setAttribute("style", "display:none;");
-    }, 300)
-  }
+    }, 300);
+  };
 
   const loadingShow = () => {
     loading.setAttribute("style", "display:block");
@@ -110,7 +109,7 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     playBtn.style.display = "none";
     pauseBtn.style.display = "flex";
     content.classList.add("active");
-    bigPlayBtnHide()
+    bigPlayBtnHide();
   };
   playBtn.onclick = function(): void {
     if (!videoCanPlay) return;
@@ -126,7 +125,7 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     playBtn.style.display = "flex";
     pauseBtn.style.display = "none";
     content.classList.remove("active");
-    bigPlayBtnShow()
+    bigPlayBtnShow();
   };
   pauseBtn.onclick = function(): void {
     if (!videoCanPlay) return;
@@ -174,18 +173,18 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     totalH = h; // 用于当前时间是否显示小时
     crrTime.innerHTML = (parseInt(h) > 0 ? "00:" : "") + "00:00";
   };
-  video.oncanplaythrough = function():void {
+  video.oncanplaythrough = function(): void {
     videoCanPlay = true;
     loadingHide();
-  }
-  video.onprogress = function():void {
-    const buffer = video.buffered
-    if (!buffer || buffer.length === 0) return
+  };
+  video.onprogress = function(): void {
+    const buffer = video.buffered;
+    if (!buffer || buffer.length === 0 || !tTime) return;
 
-    const bufferTime = buffer.end(buffer.length - 1)
-    const bufferWidth = bufferTime / tTime * 100 
-    bufferProgress.setAttribute('style', `width: ${bufferWidth}%`)
-  }
+    const bufferTime = buffer.end(buffer.length - 1);
+    const bufferWidth = (bufferTime / tTime) * 100;
+    bufferProgress.setAttribute("style", `width: ${bufferWidth}%; display: block;`);
+  };
 
   // 当视频播放的时候,进度条同步,当前时间同步,
   // ontimeupdate : 当时间当前时间更新的时候触发
@@ -237,20 +236,20 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   let draging = false;
   let distance = 0;
   // 当前播放: 小圆点位置，进度条长度，视频播放位置，当前时间显示
-  const curProgressPlay = ():number => {
+  const curProgressPlay = (): number => {
     // 计算点击此处的currentTime
     const currentTime = (distance / elementOffset(progress).width) * tTime;
     // 页面回显的currentTime数据
     cTime = currentTime;
     crrTime.innerHTML = curTimeStr(currentTime);
-    
+
     // bar进度条长度
     const curProgressPercent = distance / elementOffset(progress).width;
     barProgress.style.width = curProgressPercent * 100 + "%";
     // 小圆点位置
     curProgress.style.left = `${distance - 4}px`;
 
-    return currentTime
+    return currentTime;
   };
   const dragStart = function(event: MouseEvent | TouchEvent): void {
     event.preventDefault();
@@ -261,7 +260,9 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     // 视频暂时停止
     video.pause();
     videoPause();
-    const offsetX = (event as TouchEvent).touches ? (event as TouchEvent).touches[0].clientX : mouseOffset(event as MouseEvent).x
+    const offsetX = (event as TouchEvent).touches
+      ? (event as TouchEvent).touches[0].clientX
+      : mouseOffset(event as MouseEvent).x;
     distance = offsetX - elementOffset(progress).left; //记录点击的离起点的距离
   };
   const dragIng = function(event: MouseEvent | TouchEvent): void {
@@ -269,7 +270,9 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     if (!videoCanPlay) return;
     if (!draging) return; //如果没有通过鼠标点击起点，则直接不进行下面计算
 
-    const offsetX = (event as TouchEvent).touches ? (event as TouchEvent).touches[0].clientX : mouseOffset(event as MouseEvent).x 
+    const offsetX = (event as TouchEvent).touches
+      ? (event as TouchEvent).touches[0].clientX
+      : mouseOffset(event as MouseEvent).x;
     let disX = offsetX - elementOffset(progress).left;
 
     // 进行边界判断
@@ -283,7 +286,7 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
 
     curProgressPlay();
   };
-  const dragEnd = (event: MouseEvent | TouchEvent):void => {
+  const dragEnd = (event: MouseEvent | TouchEvent): void => {
     event.preventDefault();
     if (!videoCanPlay) return;
     draging = false;
@@ -291,23 +294,23 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     // 视频播放位置
     video.currentTime = currentTime | 0;
     videoPlay();
-  }
+  };
   const dragCancel = function(event: MouseEvent | TouchEvent): void {
     event.preventDefault();
-    if (!draging) return
-    dragEnd(event)
+    if (!draging) return;
+    dragEnd(event);
   };
-  progressBox.onmousedown = dragStart
-  progressBox.ontouchstart = dragStart
-  progressBox.onmouseleave = dragCancel
-  progressBox.ontouchcancel = dragCancel
-  progressBox.onmouseup = dragEnd
-  progressBox.ontouchend = dragEnd
-  progressBox.onmousemove = dragIng
-  progressBox.ontouchmove = dragIng
+  progressBox.onmousedown = dragStart;
+  progressBox.ontouchstart = dragStart;
+  progressBox.onmouseleave = dragCancel;
+  progressBox.ontouchcancel = dragCancel;
+  progressBox.onmouseup = dragEnd;
+  progressBox.ontouchend = dragEnd;
+  progressBox.onmousemove = dragIng;
+  progressBox.ontouchmove = dragIng;
 
   /** @desc ------------------- 实现全屏的效果 ------------------- */
-  const fullStyle = (isFull:anyType) => {
+  const fullStyle = (isFull: anyType) => {
     if (isFull) {
       content.setAttribute(
         "style",
@@ -317,22 +320,22 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     } else {
       video.pause();
       videoPause();
-      
+
       content.setAttribute("style", contentStyle);
-      video.setAttribute("style", '');
+      video.setAttribute("style", "");
     }
-  }
+  };
   document.addEventListener("fullscreenchange", function(event) {
-    fullStyle(document.fullscreenElement)
+    fullStyle(document.fullscreenElement);
   });
   video.addEventListener("fullscreenchange", function() {
-    fullStyle((video as anyType).webkitDisplayingFullscreen)
+    fullStyle((video as anyType).webkitDisplayingFullscreen);
   });
   video.addEventListener("webkitendfullscreen", function() {
-      video.pause();
-      videoPause();
-      content.setAttribute("style", contentStyle);
-      video.setAttribute("style", 'opacity:0.9999'); // ios 视频退出后控制栏自动隐藏，测试设置opaciy小于1可解决
+    video.pause();
+    videoPause();
+    content.setAttribute("style", contentStyle);
+    video.setAttribute("style", "opacity:0.9999"); // ios 视频退出后控制栏自动隐藏，测试设置opaciy小于1可解决
   });
   video.addEventListener("x5videoexitfullscreen", function() {
     const fullscreenVideo = video as anyType;

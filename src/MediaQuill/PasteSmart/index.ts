@@ -31,7 +31,7 @@ class PasteSmart extends Clipboard {
   onPaste(event: ClipboardEvent): void {
     event.preventDefault();
     if (this.options && this.options.paste) {
-      this.options.paste(event)
+      this.options.paste(event);
     }
 
     const range = this.quill.getSelection();

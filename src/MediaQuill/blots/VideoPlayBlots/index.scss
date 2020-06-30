@@ -59,7 +59,7 @@
   z-index: 1;
   transition: all 0.3s ease-out 0s;
   overflow: hidden;
-  transform-origin:center center;
+  transform-origin: center center;
 }
 
 .quill-video-player-big-play-btn {
@@ -74,7 +74,7 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   cursor: pointer;
 
-  svg  {
+  svg {
     height: 40px;
     width: 40px;
     fill: #fff;
@@ -139,7 +139,7 @@
   overflow: hidden;
 }
 
-.quill-video-player-progress{
+.quill-video-player-progress {
   position: relative;
   width: 100%;
   height: 4px;
@@ -148,9 +148,8 @@
   cursor: pointer;
 }
 
-
 .quill-video-player-progress-bar,
-.quill-video-player-progress-buffer  {
+.quill-video-player-progress-buffer {
   position: absolute;
   left: 0;
   top: 0;
@@ -159,11 +158,12 @@
   border-radius: 8px;
   z-index: 0;
   width: 0;
+  display: none;
 }
 
 .quill-video-player-progress-buffer {
-  background: rgba(255, 255, 255, 0.3);
-  // transition: all 0.3s ease-in 0s;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in 0s;
 }
 
 .quill-video-player-progress-bar {
@@ -179,6 +179,7 @@
   width: 10px;
   border-radius: 100%;
   z-index: 2;
+  display: none;
 }
 
 .quill-video-player-time {

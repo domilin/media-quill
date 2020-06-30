@@ -88,14 +88,14 @@ class VideoPlayer extends BlockEmbed {
     loading.className = "quill-media-loading-content";
     node.appendChild(loading);
 
-     /** @desc ---------暂停时显示中央大的播放按钮---------- */
-     const bigPlayBtnMask = document.createElement("div");
-     bigPlayBtnMask.className = "quill-video-player-big-play-btn-mask";
-     const bigPlayBtn = document.createElement("div");
-     bigPlayBtn.className = "quill-video-player-big-play-btn";
-     bigPlayBtn.innerHTML = palyIcon
-     bigPlayBtnMask.appendChild(bigPlayBtn)
-     node.appendChild(bigPlayBtnMask);
+    /** @desc ---------暂停时显示中央大的播放按钮---------- */
+    const bigPlayBtnMask = document.createElement("div");
+    bigPlayBtnMask.className = "quill-video-player-big-play-btn-mask";
+    const bigPlayBtn = document.createElement("div");
+    bigPlayBtn.className = "quill-video-player-big-play-btn";
+    bigPlayBtn.innerHTML = palyIcon;
+    bigPlayBtnMask.appendChild(bigPlayBtn);
+    node.appendChild(bigPlayBtnMask);
 
     // 设置id，用于播放js执行，MediaUploader
     if (id) nodeWrapper.setAttribute("id", id);
@@ -105,8 +105,8 @@ class VideoPlayer extends BlockEmbed {
   }
 
   static value(domNode: HTMLElement): DOMStringMap {
-    const id = domNode.getAttribute('id') as string
-    const src = domNode.querySelector('video')?.getAttribute('src') as string
+    const id = domNode.getAttribute("id") as string;
+    const src = domNode.querySelector("video")?.getAttribute("src") as string;
     return { id, src };
   }
 
