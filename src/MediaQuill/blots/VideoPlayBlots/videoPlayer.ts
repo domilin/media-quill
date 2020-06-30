@@ -46,6 +46,10 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   if (width && height) contentStyle = `width: ${parseFloat(width)}px; height: ${parseFloat(height)}px`;
   content.setAttribute("style", contentStyle);
 
+  barProgress.setAttribute('style', 'width: 0;')
+  bufferProgress.setAttribute('style', 'width: 0;')
+  curProgress.setAttribute('style', 'left: -4px;')
+
   // dom渲染完成后，20ms之后加事件，将不起作用，故在此首先重新load一遍video资源
   video.load();
   // 视频加载错误，每隔4s重新加载

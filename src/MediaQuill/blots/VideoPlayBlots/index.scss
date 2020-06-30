@@ -130,12 +130,13 @@
 }
 
 .quill-video-player-progress-wrapper {
-  margin-left: 8px;
+  padding: 0 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: calc(100% - 220px);
+  overflow: hidden;
 }
 
 .quill-video-player-progress{
@@ -157,11 +158,12 @@
   background: #fff;
   border-radius: 8px;
   z-index: 0;
+  width: 0;
 }
 
 .quill-video-player-progress-buffer {
   background: rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease-in 0s;
+  // transition: all 0.3s ease-in 0s;
 }
 
 .quill-video-player-progress-bar {
