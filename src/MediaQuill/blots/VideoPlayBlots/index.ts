@@ -47,7 +47,13 @@ class VideoPlayer extends BlockEmbed {
     const progressBar = document.createElement("div");
     progressBar.className = "quill-video-player-progress-bar";
     progress.appendChild(progressBar);
-    controls.appendChild(progress);
+    const progressCur = document.createElement("div");
+    progressCur.className = "quill-video-player-progress-current";
+    progress.appendChild(progressCur);
+    const progressBox = document.createElement("div");
+    progressBox.className = "quill-video-player-progress-wrapper";
+    progressBox.appendChild(progress);
+    controls.appendChild(progressBox);
 
     // 总共时间，当前播放时间
     const time = document.createElement("div");
@@ -78,6 +84,15 @@ class VideoPlayer extends BlockEmbed {
     const loading = document.createElement("div");
     loading.className = "quill-media-loading-content";
     node.appendChild(loading);
+
+     /** @desc ---------暂停时显示中央大的播放按钮---------- */
+     const bigPlayBtnMask = document.createElement("div");
+     bigPlayBtnMask.className = "quill-video-player-big-play-btn-mask";
+     const bigPlayBtn = document.createElement("div");
+     bigPlayBtn.className = "quill-video-player-big-play-btn";
+     bigPlayBtn.innerHTML = palyIcon
+     bigPlayBtnMask.appendChild(bigPlayBtn)
+     node.appendChild(bigPlayBtnMask);
 
     // 设置id，用于播放js执行，MediaUploader
     if (id) nodeWrapper.setAttribute("id", id);

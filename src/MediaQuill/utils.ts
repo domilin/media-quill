@@ -69,3 +69,23 @@ export const uuid = (): string => {
       y: e.pageY || e.clientY + scrollY
     };
   };
+
+/**
+ * @desc 判断是否是PC（服务端/浏览器端）
+ * @returns {Boolean}
+ * @Params {req} req服务端需要
+ * @method isPc()
+ */
+export const isPc = ():boolean => {
+  const userAgent = window.navigator.userAgent.toLowerCase()
+
+  const Agents = ['android', 'iphone', 'ipod', 'windows phone', 'ipad']
+  let flag = true
+  for (let i = 0; i < Agents.length; i++) {
+      if (userAgent.indexOf(Agents[i]) > -1) {
+          flag = false
+          break
+      }
+  }
+  return flag
+}
