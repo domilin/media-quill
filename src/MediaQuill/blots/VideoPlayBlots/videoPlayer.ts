@@ -33,6 +33,7 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   const progress = wrapper?.querySelector(".quill-video-player-progress") as HTMLDivElement;
   const barProgress = wrapper?.querySelector(".quill-video-player-progress-bar") as HTMLDivElement;
   const curProgress = wrapper?.querySelector(".quill-video-player-progress-current") as HTMLDivElement;
+  const bufferProgress = wrapper?.querySelector(".quill-video-player-progress-buffer") as HTMLDivElement;
   const crrTime = wrapper?.querySelector(".quill-video-player-cur-time") as HTMLDivElement;
   const totalTime = wrapper?.querySelector(".quill-video-player-total-time") as HTMLDivElement;
   const fullscreen = wrapper?.querySelector(".quill-video-player-fullscreen") as HTMLDivElement;
@@ -153,10 +154,7 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   let totalH = "0";
   let tTime: number;
   let cTime: number;
-  video.oncanplay = function(): void {
-    videoCanPlay = true;
-    loadingHide();
-
+  video.onloadedmetadata = function(): void {
     // 显示总时长
     tTime = video.duration;
     // 将总秒数,转换为 时分秒格式 00:00:00
@@ -172,6 +170,18 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     totalH = h; // 用于当前时间是否显示小时
     crrTime.innerHTML = (parseInt(h) > 0 ? "00:" : "") + "00:00";
   };
+  video.oncanplaythrough = function():void {
+    videoCanPlay = true;
+    loadingHide();
+  }
+  video.onprogress = function():void {
+    const buffer = video.buffered
+    if (!buffer || buffer.length === 0) return
+
+    const bufferTime = buffer.end(buffer.length - 1)
+    const bufferWidth = bufferTime / tTime * 100 
+    bufferProgress.setAttribute('style', `width: ${bufferWidth}%`)
+  }
 
   // 当视频播放的时候,进度条同步,当前时间同步,
   // ontimeupdate : 当时间当前时间更新的时候触发
@@ -313,6 +323,12 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   });
   video.addEventListener("fullscreenchange", function() {
     fullStyle((video as anyType).webkitDisplayingFullscreen)
+  });
+  video.addEventListener("webkitendfullscreen", function() {
+      video.pause();
+      videoPause();
+      content.setAttribute("style", contentStyle);
+      video.setAttribute("style", 'opacity:0.9999'); // ios 视频退出后控制栏自动隐藏，测试设置opaciy小于1可解决
   });
   video.addEventListener("x5videoexitfullscreen", function() {
     const fullscreenVideo = video as anyType;

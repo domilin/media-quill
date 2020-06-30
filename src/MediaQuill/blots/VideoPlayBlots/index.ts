@@ -50,6 +50,9 @@ class VideoPlayer extends BlockEmbed {
     const progressCur = document.createElement("div");
     progressCur.className = "quill-video-player-progress-current";
     progress.appendChild(progressCur);
+    const progressBuffer = document.createElement("div");
+    progressBuffer.className = "quill-video-player-progress-buffer";
+    progress.appendChild(progressBuffer);
     const progressBox = document.createElement("div");
     progressBox.className = "quill-video-player-progress-wrapper";
     progressBox.appendChild(progress);
