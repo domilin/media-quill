@@ -39,9 +39,11 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   const loading = wrapper?.querySelector(".quill-media-loading-content") as HTMLDivElement;
   let videoCanPlay = false;
 
-  if (width && !height) content.setAttribute("style", `width: ${parseFloat(width)}px`);
-  if (!width && height) content.setAttribute("style", `height: ${parseFloat(height)}px`);
-  if (width && height) content.setAttribute("style", `width: ${parseFloat(width)}px; height: ${parseFloat(height)}px`);
+  let contentStyle = ''
+  if (width && !height) contentStyle = `width: ${parseFloat(width)}px`;
+  if (!width && height) contentStyle = `height: ${parseFloat(height)}px`;
+  if (width && height) contentStyle = `width: ${parseFloat(width)}px; height: ${parseFloat(height)}px`;
+  content.setAttribute("style", contentStyle);
 
   // dom渲染完成后，20ms之后加事件，将不起作用，故在此首先重新load一遍video资源
   video.load();
@@ -291,17 +293,26 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   progressBox.ontouchmove = dragIng
 
   /** @desc ------------------- 实现全屏的效果 ------------------- */
-  document.addEventListener("fullscreenchange", function(e) {
-    if (document.fullscreenElement) {
+  const fullStyle = (isFull:anyType) => {
+    if (isFull) {
       content.setAttribute(
         "style",
         "position:fixed; top:0; left:0; height:100%; width: 100%; max-width: inherit; z-index:9999;"
       );
       video.setAttribute("style", "height:100%");
     } else {
-      content.setAttribute("style", "");
-      video.setAttribute("style", "height:auto");
+      video.pause();
+      videoPause();
+      
+      content.setAttribute("style", contentStyle);
+      video.setAttribute("style", '');
     }
+  }
+  document.addEventListener("fullscreenchange", function(event) {
+    fullStyle(document.fullscreenElement)
+  });
+  video.addEventListener("fullscreenchange", function() {
+    fullStyle((video as anyType).webkitDisplayingFullscreen)
   });
   video.addEventListener("x5videoexitfullscreen", function() {
     const fullscreenVideo = video as anyType;
