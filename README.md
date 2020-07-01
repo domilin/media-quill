@@ -50,10 +50,10 @@ import { videoInit, videoPlayerCreate, videoPlayer } from "./MediaQuill/blots/Vi
 videoPlayerCreate({
   videoWrapper: document.getElementById("videoPlayerTestWrapper") as HTMLDivElement,
   src: "https://test-hx24-media.huoxing24.com/video/news/2020/06/30/20200630204904878346.mp4",
-  id: "videoPlayerTestWrapper"
+  id: "videoPlayerTest"
 });
 videoPlayer({
-  id: "videoPlayerTestWrapper",
+  id: "videoPlayerTest",
   width: "400px"
 });
 
