@@ -39,6 +39,31 @@ mediaQuill.mediaUploading();
 npm install --save media-quill
 ```
 
+# VideoPlayer
+
+The video player can be used alone
+
+```javascript
+import { videoInit, videoPlayerCreate, videoPlayer } from "./MediaQuill/blots/VideoPlayBlots/videoPlayer";
+
+// video player example
+videoPlayerCreate({
+  videoWrapper: document.getElementById("videoPlayerTestWrapper") as HTMLDivElement,
+  src: "https://test-hx24-media.huoxing24.com/video/news/2020/06/30/20200630204904878346.mp4",
+  id: "videoPlayerTestWrapper"
+});
+videoPlayer({
+  id: "videoPlayerTestWrapper",
+  width: "400px"
+});
+
+// html
+<div id="videoPlayerTestWrapper"></div>
+
+//css
+@import "media-quill/es/videoPlayer.scss";
+```
+
 # Example
 
 **Since it contains the video player, it contains both ends: editor side, display side**
