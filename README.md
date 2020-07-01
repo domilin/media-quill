@@ -172,4 +172,18 @@ export default () => {
 
 ```stylesheet
 @import "../../../node_modules/media-quill/es/index.scss";
+
+.ql-editor {
+    padding: 0;
+}
+
+.ql-container.ql-snow {
+    border: none;
+}
+```
+
+```html
+<div class="ql-container ql-snow">
+  <div class="ql-editor">the editor html content</div>
+</div>
 ```
