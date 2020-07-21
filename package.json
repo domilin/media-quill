@@ -75,7 +75,9 @@
     "build": "node scripts/build.js",
     "buildQuill": "node scripts/build-quill.js",
     "buildQuillEs": "node scripts/build-quill-es.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "npmLogin": "npm login -d",
+    "npmPublish": "cd ./publish && npm publish"
   },
   "eslintConfig": {
     "extends": "react-app"

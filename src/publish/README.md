@@ -166,7 +166,14 @@ export default () => {
   useEffect(() => {
     videoInit({ width: "640px" });
   }, []);
-  return <div>rich html</div>;
+  return (
+    <div className="ql-container ql-snow">
+      <div
+        className="ql-editor"
+        dangerouslySetInnerHTML={{ __html: htmlString }}
+      />
+    </div>
+  );
 };
 ```
 
@@ -180,10 +187,4 @@ export default () => {
 .ql-container.ql-snow {
     border: none;
 }
-```
-
-```html
-<div class="ql-container ql-snow">
-  <div class="ql-editor">the editor html content</div>
-</div>
 ```
