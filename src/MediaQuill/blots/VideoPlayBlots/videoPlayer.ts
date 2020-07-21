@@ -168,7 +168,7 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   let videoCanPlay = false;
 
   // 安卓不能获取到默认视频帧画面，设置为纯色遮挡其它安卓视频样式
-  if (window.navigator.userAgent.indexOf("android") > -1) {
+  if (window.navigator.userAgent.toLowerCase().indexOf("android") > -1) {
     bigPlayBtn.setAttribute('style', "background: radial-gradient(#1b1c1f 99%, rgba(0, 0, 0, 0))")
   }
 
