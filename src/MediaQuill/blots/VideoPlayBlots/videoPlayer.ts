@@ -151,7 +151,7 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
   }
 
   const wrapper = document.getElementById(id as string) as HTMLDivElement;
-  const content = wrapper.firstChild as HTMLDivElement;
+  const content = wrapper?.querySelector(".quill-video-player-content") as HTMLDivElement;
   const video = wrapper?.querySelector("video") as HTMLVideoElement;
   const playBtn = wrapper?.querySelector(".quill-video-player-icon-play") as HTMLDivElement;
   const bigPlayBtn = wrapper?.querySelector(".quill-video-player-big-play-btn-mask") as HTMLDivElement;
@@ -510,6 +510,15 @@ export const videoPlayer = ({ height, width, id }: PlayerParams): void => {
     }
   };
 };
+
+declare global {
+  interface Window {
+    videoInit: (args?: InitParams) => void;
+  }
+}
+if (typeof window !== 'undefined') {
+  window.videoInit = videoInit
+}
 
 export default {
   videoInit,
