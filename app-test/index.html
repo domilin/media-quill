@@ -95,6 +95,11 @@
     <script type="text/javascript" src="./videoPlayer.js"></script>
     <script>
       window.onload = function () {
+        if (window.navigator.userAgent.indexOf("android") > -1) {
+          document
+            .querySelector(".quill-video-player-fullscreen")
+            .setAttribute("style", "display:none");
+        }
         videoInit();
       };
     </script>
