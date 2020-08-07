@@ -7,6 +7,12 @@ The pictures in the copied HTML content, pasteboard pictures, custom picture upl
 
 Built in vanilla JS, typescript support, so it can be used on React, Vue, Angular as well
 
+# Demo
+
+### [Test Demo](https://www.domilin.com/submit)
+
+<https://www.domilin.com/submit>
+
 # API
 
 Provide two apis

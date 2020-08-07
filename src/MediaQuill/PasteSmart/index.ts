@@ -52,9 +52,9 @@ class PasteSmart extends Clipboard {
       if (this.imageUpload) {
         pasteDelta.ops = pasteDelta.map(function(item: DeltaOperation, index: number): DeltaOperation {
           if (item.insert && typeof item.insert === "object" && "image" in item.insert) {
-            item.attributes = item.attributes || {};
-            item.attributes.link = "#quill-paste-img-upload";
+            return {...item, attributes: {alt: '#quill-paste-img-upload'}}
           }
+
           return item;
         });
       }
@@ -82,14 +82,14 @@ class PasteSmart extends Clipboard {
         src: string;
         id: string;
       }
-      const uploadImg = this.quill.root.getElementsByTagName("a");
+      const uploadImg = this.quill.root.getElementsByTagName("img");
       const uploadImgArr = Array.prototype.slice.call(uploadImg);
       const uploadImgIdArr: IdItem[] = [];
 
       // 替换需要上传的图片为上传中样式
       uploadImgArr.map((item, index) => {
-        if (item.getAttribute("href") === "#quill-paste-img-upload") {
-          const src = item.getElementsByTagName("img")[0].getAttribute("src");
+        if (item.getAttribute("alt") === "#quill-paste-img-upload") {
+          const src = item.getAttribute("src");
           const index = this.quill.getIndex(Quill.find(item));
           const id = `quillImageUploading-${uuid()}`;
 

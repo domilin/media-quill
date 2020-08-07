@@ -107,6 +107,9 @@ class MediaUploader {
 
     // IE 11 is .files other browsers are .items
     if (clipboard && (clipboard.items || clipboard.files)) {
+      const html = (clipboard as DataTransfer).getData("text/html");
+      if (html) return // html的图片上传有clipboard处理
+
       const items = clipboard.items || clipboard.files;
       const IMAGE_MIME_REGEX = /^image\/(jpe?g|gif|png|svg|webp)$/i;
 
