@@ -9,9 +9,9 @@ Built in vanilla JS, typescript support, so it can be used on React, Vue, Angula
 
 # Demo
 
-### [Test Demo](https://www.domilin.com/submit)
+### [Test Demo](https://www.domilin.com/article/submit)
 
-<https://www.domilin.com/submit>
+<https://www.domilin.com/article/submit>
 
 # API
 
